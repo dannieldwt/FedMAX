@@ -15,6 +15,7 @@ from models.Nets import CNNCifarStd5, CNNEmnistStd5, CNNCifar100Std5
 from models.Fed import FedAvg
 from models.test import test_img
 import torch.backends.cudnn as cudnn
+import os
 
 
 def adjust_learning_rate(lr, lr_drop):
@@ -33,6 +34,8 @@ def save_result(test_acc, avg_loss, filename=''):
 def main():
     # parse args
     args = args_parser()
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
+    dataPath = args.datasetPath
 
     # random seed
     np.random.seed(args.seed)
@@ -54,7 +57,7 @@ def main():
             ),
         ]
         dataset_train = datasets.CIFAR10(
-            './datasets/cifar10', train=True, download=True,
+            dataPath, train=True, download=True,
             transform=transforms.Compose(_CIFAR_TRAIN_TRANSFORMS))
 
         _CIFAR_TEST_TRANSFORMS = [
@@ -65,7 +68,7 @@ def main():
             ),
         ]
         dataset_test = datasets.CIFAR10(
-            './datasets/cifar10', train=False,
+            dataPath, train=False,
             transform=transforms.Compose(_CIFAR_TEST_TRANSFORMS))
 
         if args.iid == 0:  # IID
@@ -84,12 +87,12 @@ def main():
             transforms.Normalize((0.1307,), (0.3081,))
         ]
         dataset_train = datasets.EMNIST(
-            './datasets/emnist', train=True, download=True,
+            dataPath, train=True, download=True,
             transform=transforms.Compose(_MNIST_TRAIN_TRANSFORMS),
             split='letters'
         )
         dataset_test = datasets.EMNIST(
-            './datasets/emnist', train=False, download=True,
+            dataPath, train=False, download=True,
             transform=transforms.Compose(_MNIST_TEST_TRANSFORMS),
             split='letters'
         )
@@ -107,7 +110,7 @@ def main():
             ),
         ]
         dataset_train = datasets.CIFAR100(
-            './datasets/cifar100', train=True, download=True,
+            dataPath, train=True, download=True,
             transform=transforms.Compose(_CIFAR_TRAIN_TRANSFORMS))
 
         _CIFAR_TEST_TRANSFORMS = [
@@ -118,7 +121,7 @@ def main():
             ),
         ]
         dataset_test = datasets.CIFAR100(
-            './datasets/cifar100', train=False,
+            dataPath, train=False,
             transform=transforms.Compose(_CIFAR_TEST_TRANSFORMS))
         if args.iid == 0:  # IID
             dict_users = cifar_100_iid(dataset_train, args.num_users)

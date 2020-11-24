@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
-export CUDA_VISIBLE_DEVICES=0
+#export CUDA_VISIBLE_DEVICES=0
 
-# FedAvg CIFAR-10 T=3000 non-IID
-python main.py --epochs 3000 \
-               --lr_drop 0.9992 \
-               --local_ep 1 \
-               --num_users 100 \
-               --frac 0.1 \
-               --seed 1 \
-               --iid 2 \
-               --dataset cifar10 \
-               --loss_type fedavg \
-
-# FedAvg CIFAR-10 T=3000 IID
-python main.py --epochs 3000 \
-               --lr_drop 0.9992 \
-               --local_ep 1 \
-               --num_users 100 \
-               --frac 0.1 \
-               --seed 1 \
-               --iid 0 \
-               --dataset cifar10 \
-               --loss_type fedavg \
+## FedAvg CIFAR-10 T=3000 non-IID
+#python main.py --epochs 3000 \
+#               --lr_drop 0.9992 \
+#               --local_ep 1 \
+#               --num_users 100 \
+#               --frac 0.1 \
+#               --seed 1 \
+#               --iid 2 \
+#               --dataset cifar10 \
+#               --loss_type fedavg \
+#
+## FedAvg CIFAR-10 T=3000 IID
+#python main.py --epochs 3000 \
+#               --lr_drop 0.9992 \
+#               --local_ep 1 \
+#               --num_users 100 \
+#               --frac 0.1 \
+#               --seed 1 \
+#               --iid 0 \
+#               --dataset cifar10 \
+#               --loss_type fedavg \
 
 # FedAvg CIFAR-10 T=600 non-IID
 python main.py --epochs 600 \
@@ -33,7 +33,9 @@ python main.py --epochs 600 \
                --seed 1 \
                --iid 2 \
                --dataset cifar10 \
-               --loss_type fedavg \
+               --loss_type fedmax \
+               --gpu 7 \
+               --datasetPath /home/dengweitao/cifar \
 
 # FedAvg FEMNIST* T=600 non-IID
 python main.py --epochs 600 \
@@ -44,7 +46,10 @@ python main.py --epochs 600 \
                --seed 1 \
                --iid 2 \
                --dataset emnist \
-               --loss_type fedavg \
+               --loss_type fedmax \
+               --gpu 7 \
+               --datasetPath /home/dengweitao/cifar \
+
 
 # FedAvg CIFAR-100 T=600 non-IID
 python main.py --epochs 600 \
@@ -55,29 +60,31 @@ python main.py --epochs 600 \
                --seed 1 \
                --iid 2 \
                --dataset cifar100 \
-               --loss_type fedavg \
-
-# FedProx CIFAR-10 T=3000 non-IID
-python main.py --epochs 3000 \
-               --lr_drop 0.9992 \
-               --local_ep 1 \
-               --num_users 100 \
-               --frac 0.1 \
-               --seed 1 \
-               --iid 2 \
-               --dataset cifar10 \
-               --loss_type fedprox \
-               --mu 1 \
-
-# FedMAX CIFAR-10 T=3000 non-IID
-python main.py --epochs 3000 \
-               --lr_drop 0.9992 \
-               --local_ep 1 \
-               --num_users 100 \
-               --frac 0.1 \
-               --seed 1 \
-               --iid 2 \
-               --dataset cifar10 \
                --loss_type fedmax \
-               --beta 1000 \
+               --gpu 7 \
+               --datasetPath /home/dengweitao/cifar \
+
+## FedProx CIFAR-10 T=3000 non-IID
+#python main.py --epochs 3000 \
+#               --lr_drop 0.9992 \
+#               --local_ep 1 \
+#               --num_users 100 \
+#               --frac 0.1 \
+#               --seed 1 \
+#               --iid 2 \
+#               --dataset cifar10 \
+#               --loss_type fedprox \
+#               --mu 1 \
+#
+## FedMAX CIFAR-10 T=3000 non-IID
+#python main.py --epochs 3000 \
+#               --lr_drop 0.9992 \
+#               --local_ep 1 \
+#               --num_users 100 \
+#               --frac 0.1 \
+#               --seed 1 \
+#               --iid 2 \
+#               --dataset cifar10 \
+#               --loss_type fedmax \
+#               --beta 1000 \
 
