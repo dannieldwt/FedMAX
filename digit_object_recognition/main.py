@@ -191,7 +191,7 @@ def main():
         learning_rate = adjust_learning_rate(learning_rate, args.lr_drop)
 
     filename = './accuracy-' + str(args.dataset) + '-iid' + str(args.iid) + '-' + str(args.epochs) + '-seed' \
-               + str(args.seed) + '-' + str(args.loss_type) + '-gamma' + str(args.gamma) + '-mu' + str(args.mu)
+               + str(args.seed) + '-' + str(args.loss_type) + '-beta' + str(args.beta) + '-mu' + str(args.mu)
     save_result(test_acc, avg_loss, filename)
     
 
